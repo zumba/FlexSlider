@@ -137,11 +137,13 @@
         // SLIDSESHOW
         if (slider.vars.slideshow) {
           if (slider.vars.pauseOnHover) {
-            slider.hover(function() {
-              if (!slider.manualPlay && !slider.manualPause) { slider.pause(); }
-            }, function() {
-              if (!slider.manualPause && !slider.manualPlay && !slider.stopped) { slider.play(); }
-            });
+            slider
+              .on('mouseenter', function() {
+                !slider.manualPlay && !slider.manualPause && slider.pause();
+              })
+              .on('mouseleave', function() {
+                !slider.manualPause && !slider.manualPlay && !slider.stopped && slider.play();
+              });
           }
           // initialize animation
           //If we're visible, or we don't use PageVisibility API
